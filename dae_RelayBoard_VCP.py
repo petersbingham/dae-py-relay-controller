@@ -37,12 +37,14 @@ class DAE_RelayBoard_VCP:
         self.ser = None
         
     def initialise(self, *args):
+        self.disconnect()
         self.portstring = args[0]
         self.ser = self._connectToSerial()   
     
     def disconnect(self):
         if self.ser is not None:
             self.ser.close()
+            self.ser = None
         
     def _connectToSerial(self):    
         try:
