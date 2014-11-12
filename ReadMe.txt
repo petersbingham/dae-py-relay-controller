@@ -1,4 +1,4 @@
-Denkovi Relay Board Controller v1.1
+Denkovi Relay Board Controller v1.2
 
 #-----------------------------------------------------------------------------
 #Copyright (c) Peter Bingham  (petersbingham@hotmail.co.uk)
@@ -39,3 +39,4 @@ Either use the common interface file, denkovi_Relay.py or use classes in denkovi
 
 Change Log:
 1.1 - Fixed serial not being flagged as close on disconnect and failure to ensure disconnection on a reconnect.
+1.2 - Linux support added.

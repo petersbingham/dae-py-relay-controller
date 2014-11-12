@@ -27,7 +27,7 @@ import dae_RelayBoard_Common
 class DAE_RelayBoard_VCP:
     TIMEOUT = 1.0
     DELIM = "//"
-    DEFAULT_CMDDELAY = 0.05 #Can override this default with zero and control delay in client code. Says 5ms but was getting corruption even around 20ms, so increased to 50ms. See test16Intervals.py
+    DEFAULT_CMDDELAY = 0.05 #Can override this default with zero and control delay in client code. Says 5ms but was getting corruption even around 20ms, so increased to 50ms. See test16Intervals.
         
     def __init__(self, *args): 
         if len(args)>0:

@@ -47,7 +47,7 @@ class DAE_RelayBoard:
         
     def initialise(self, *args):
         self._checkInit()
-        self.relayHandler.initialise(*args)  
+        self.relayHandler.initialise(*args)
     
     def disconnect(self):
         self._checkInit()

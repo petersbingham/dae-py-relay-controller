@@ -42,7 +42,7 @@ FT_INVALID_ARGS = 16
 FT_NOT_SUPPORTED = 17
 FT_OTHER_ERROR = 18
 
-def FTErrMap(errCode):
+def FTDllErrMap(errCode):
     return {
         FT_OK : "FT_OK",
         FT_INVALID_HANDLE : "FT_INVALID_HANDLE",
@@ -75,7 +75,7 @@ FT_OPEN_BY_LOCATION = 4
 
 MAX_BUFF_SZ = 64
 
-class FTD2XXWrap(object):
+class FTD2XXDllWrap(object):
     def __init__(self):
         self.FTD2XXDLL = WinDLL("FTD2XX.dll")
  
@@ -88,8 +88,8 @@ class FTD2XXWrap(object):
         ret = self.FTD2XXDLL.FT_Close(handle)
         return (ret,)
 
-    def FT_Write(self, handle, buffer, numBytes):
-        buff = c_char_p(buffer)
+    def FT_Write(self, handle, buff, numBytes):
+        buff = c_char_p(buff)
         bytesWritten = c_int()
         ret = self.FTD2XXDLL.FT_Write(handle, cast(buff,c_void_p), numBytes, pointer(bytesWritten))
         return (ret, bytesWritten)
@@ -136,7 +136,7 @@ class FTD2XXWrap(object):
         ret = self.FTD2XXDLL.FT_GetBitMode(handle, pointer(charBuff))
         return (ret, charBuff.value)
     
-    def FT_ResetDevice (handle):
+    def FT_ResetDevice (self, handle):
         ret = self.FTD2XXDLL.FT_ResetDevice(handle)
         return (ret,)
     

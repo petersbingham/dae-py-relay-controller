@@ -20,7 +20,7 @@
 #THE SOFTWARE.
 #-----------------------------------------------------------------------------
 
-from FTD2XXWrap import *
+import sys
 import dae_RelayBoard_Common
 
 class DAE_RelayBoard_D2XX:
@@ -28,26 +28,27 @@ class DAE_RelayBoard_D2XX:
     MASK = 255
     BITMODE = 4 
     
-    def __init__(self):  
-        self.handle = None      
-        try:
-            self.FTD2XX = FTD2XXWrap()
-        except WindowsError:
-            self.FTD2XX = None
+    def __init__(self):       
+        if sys.platform == 'win32':
+            import FTD2XXWindows
+            self.FTD2XX = FTD2XXWindows.FTD2XXWindows()
+        elif sys.platform == 'linux2':
+            import FTD2XXLinux
+            self.FTD2XX = FTD2XXLinux.FTD2XXLinux()
+        
         
     #currently only gets first board
     def initialise(self, *args):
         self.disconnect()
-        self._checkInit(False)
-        ret, self.handle = self._handleRet(self.FTD2XX.initFirstSpecifiedSerialNum(dae_RelayBoard_Common.DENKOVI_ID))
-        self._handleRet(self.FTD2XX.FT_SetBaudRate(self.handle, self.BAUDRATE))
-        self._handleRet(self.FTD2XX.FT_SetBitMode(self.handle, self.MASK, self.BITMODE))
+        self._checkInit()
+        deviceId = dae_RelayBoard_Common.DENKOVI_ID
+        if len(args):
+            deviceId = args[0]
+        self.FTD2XX.initialise(deviceId, self.BAUDRATE, self.MASK, self.BITMODE)
     
     def disconnect(self):
-        if self.handle is not None:
-            self._checkInit()
-            self._handleRet(self.FTD2XX.FT_Close(self.handle))
-            self.handle = None
+        self._checkInit()
+        self.FTD2XX.close()
             
 ###############
 ### Setters ###
@@ -66,22 +67,25 @@ class DAE_RelayBoard_D2XX:
     def setState(self, relay, on):
         self._checkInit()
         if relay>self.NUMRELAYS or relay<1:
-            raise dae_RelayBoard_Common.Denkovi_Exception("Relay Index out of bound")
-        stateByte = self._getStateByte()            
+            raise dae_RelayBoard_Common.Denkovi_Exception("Relay Index out of bounds")
+        stateByte = self._readByte()            
         toggle = 1 << self._getBitIndex(relay)
         if on:
             relState = stateByte | toggle
         else:
             relState = stateByte & ~toggle                       
-        self._handleRet(self.FTD2XX.FT_Write(self.handle, chr(relState), 1))
+        self._writeByte(relState)
     
     def _setAllStates(self, on):
         self._checkInit()
         if on:
-            writeChar = chr(0xFF)
+            writeChar = 0xFF
         else:
-            writeChar = chr(0)
-        self._handleRet(self.FTD2XX.FT_Write(self.handle, writeChar, 1))
+            writeChar = 0
+        self._writeByte(writeChar)
+           
+    def _writeByte(self, byte):
+        return self.FTD2XX.writeByte(byte)
 
 ###############
 ### Getters ###
@@ -89,7 +93,7 @@ class DAE_RelayBoard_D2XX:
                                
     def getStates(self):
         self._checkInit()
-        stateByte = self._getStateByte()
+        stateByte = self._readByte()
         states = {}
         for relay in range(1, self.NUMRELAYS+1):
             states[relay] = self._getState(stateByte, relay)
@@ -98,8 +102,8 @@ class DAE_RelayBoard_D2XX:
     def getState(self, relay):
         self._checkInit()
         if relay>self.NUMRELAYS or relay<1:
-            raise dae_RelayBoard_Common.Denkovi_Exception("Relay Index out of bound")
-        stateByte = self._getStateByte()
+            raise dae_RelayBoard_Common.Denkovi_Exception("Relay Index out of bounds")
+        stateByte = self._readByte()
         return self._getState(stateByte, relay)
     
     def _getState(self, stateByte, relay):
@@ -108,24 +112,16 @@ class DAE_RelayBoard_D2XX:
         else:
             return False  
            
-    def _getStateByte(self):
-        ret, stateByte = self._handleRet(self.FTD2XX.FT_GetBitMode(self.handle))
-        return stateByte   
+    def _readByte(self):
+        return self.FTD2XX.readByte()
 
 ###############
 ### Helpers ###
 ############### 
-       
-    def _handleRet(self, ret):
-        if ret[0] != FT_OK:
-            raise dae_RelayBoard_Common.Denkovi_Exception("FT return error: " + FTErrMap(ret[0]))
-        return ret
     
-    def _checkInit(self, checkHandle=True):
+    def _checkInit(self):
         if self.FTD2XX is None:
             raise dae_RelayBoard_Common.Denkovi_Exception("FTD2XX module not initialised")
-        if checkHandle and self.handle is None:
-            raise dae_RelayBoard_Common.Denkovi_Exception("No FT connection")
             
             
 class DAE_RelayBoard_8(DAE_RelayBoard_D2XX):
