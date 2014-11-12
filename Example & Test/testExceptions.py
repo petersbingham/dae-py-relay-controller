@@ -37,10 +37,13 @@ def testException(function, *args):
     except dae_RelayBoard_Common.Denkovi_Exception as inst:
         print "Expected Exception: " + str(inst)
 
-def testBoard(boardType, numRelays):
+def testBoard(boardType, numRelays, devID=None):
     dr = dae_RelayBoard.DAE_RelayBoard(boardType)
     testException(dr.setAllStatesOn)
-    dr.initialise(COMPORT)
+    if devID is not None:
+        dr.initialise(devID)
+    else:
+        dr.initialise()
     testException(dr.setState, numRelays+1, True)
     testException(dr.getState, numRelays+1)
     testException(dr.setState, 0, True)
@@ -51,4 +54,4 @@ testException(dae_RelayBoard.DAE_RelayBoard, 99999)
 
 #testBoard(dae_RelayBoard.DAE_RELAYBOARD_TYPE_4, 4)
 #testBoard(dae_RelayBoard.DAE_RELAYBOARD_TYPE_8, 8)
-testBoard(dae_RelayBoard.DAE_RELAYBOARD_TYPE_16, 16)
+testBoard(dae_RelayBoard.DAE_RELAYBOARD_TYPE_16, 16, COMPORT)
