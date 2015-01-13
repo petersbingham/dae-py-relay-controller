@@ -22,6 +22,7 @@ Denkovi Relay Board Controller v1.3
 #THE SOFTWARE.
 #-----------------------------------------------------------------------------
 
+
 Known Limitations and Assumptions:
 1: Written and Tested in Python 2.7 only.
 2: 4 and 8 relay boards do not handle connection to multiple devices. Connects to first found Denkovi.
@@ -29,14 +30,12 @@ Known Limitations and Assumptions:
 4: Possible race conditions with device plugging.
 5: Uses a VCP delay of 50ms. Documentation specifies 5ms but was still seeing corruption at 20ms. Could be improved for the gets by doing an initial sync and then keeping track of the states in the class.
 
-Install using "python setup.py install" in this directory at thecommand line.
 
-Usage is pretty simple. Have a look at the examples and test code in the "Example & Test" folder. Look at the dae_RelayBoard file to see the interface functions.
-
-To run "Example & Test\example16.py", for example, set the com port in the file and then open a cmd and cd into "Example & Test" folder and type "python example16.py".
-
-Either use the common interface file, denkovi_Relay.py or use classes in denkovi_Relay_D2XX.py and denkovi_Relay_VCP.py directly. 
-
+Help:
+-Install using "python setup.py install" in this directory at thecommand line.
+-Both installions require serial module. The Linux version requires pylibftdi. For Windows FTD2XX.dll will need to be in your path.
+-Usage is pretty simple. Have a look at the examples and test code in the "Example & Test" folder. Look at the dae_RelayBoard file to see the interface functions.
+-To run "Example & Test\example16.py", for example, set the com port in the file and then open a cmd and cd into "Example & Test" folder and type "python example16.py".
 
 
 Change Log:
