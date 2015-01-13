@@ -22,9 +22,7 @@
 
 #Example Code
 
-import sys
 import time
-sys.path.append('.\\..')
 import dae_RelayBoard   
 
 dr = dae_RelayBoard.DAE_RelayBoard(dae_RelayBoard.DAE_RELAYBOARD_TYPE_4)

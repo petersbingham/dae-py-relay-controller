@@ -1,4 +1,4 @@
-Denkovi Relay Board Controller v1.2
+Denkovi Relay Board Controller v1.3
 
 #-----------------------------------------------------------------------------
 #Copyright (c) Peter Bingham  (petersbingham@hotmail.co.uk)
@@ -29,6 +29,8 @@ Known Limitations and Assumptions:
 4: Possible race conditions with device plugging.
 5: Uses a VCP delay of 50ms. Documentation specifies 5ms but was still seeing corruption at 20ms. Could be improved for the gets by doing an initial sync and then keeping track of the states in the class.
 
+Install using "python setup.py install" in this directory at thecommand line.
+
 Usage is pretty simple. Have a look at the examples and test code in the "Example & Test" folder. Look at the dae_RelayBoard file to see the interface functions.
 
 To run "Example & Test\example16.py", for example, set the com port in the file and then open a cmd and cd into "Example & Test" folder and type "python example16.py".
@@ -38,5 +40,6 @@ Either use the common interface file, denkovi_Relay.py or use classes in denkovi
 
 
 Change Log:
-1.1 - Fixed serial not being flagged as close on disconnect and failure to ensure disconnection on a reconnect.
+1.3 - setup.py package installer added
 1.2 - Linux support added.
+1.1 - Fixed serial not being flagged as close on disconnect and failure to ensure disconnection on a reconnect.

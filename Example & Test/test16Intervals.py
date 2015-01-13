@@ -25,8 +25,6 @@ INTERVAL = 0.050
 #Set Com port below:
 COMPORT = "COM8"
 
-import sys
-sys.path.append('.\\..')  
 import time
 import testCommon
 import dae_RelayBoard 
