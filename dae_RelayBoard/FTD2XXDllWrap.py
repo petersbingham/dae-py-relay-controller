@@ -104,8 +104,8 @@ class FTD2XXDllWrap(object):
         
     def FT_GetNumDevices(self):
         numDevs = c_int()
-        ret = self.FTD2XXDLL.FT_ListDevices(pointer(numDevs), None, FT_LIST_NUMBER_ONLY)
-        return (ret, numDevs.value)   
+        ret = self.FTD2XXDLL.FT_CreateDeviceInfoList(byref(numDevs))
+        return (ret, numDevs.value)  
         
     def FT_GetDeviceDescription(self, index):
         return self._getBuffer(index, FT_OPEN_BY_DESCRIPTION)
