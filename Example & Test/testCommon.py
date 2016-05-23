@@ -44,13 +44,13 @@ def testGetFunctions(dr, printNums=True):
         else:
             singleStates[relay] = "F"
     if printNums:
-        print "All States:\t" + str(allStates.keys()).replace("'","")
-        print "\t\t" + str(allStates.values()).replace("'","")
-        print "Single States:\t" + str(singleStates.keys()).replace("'","")
-        print "\t\t" + str(singleStates.values()).replace("'","")
+        print ("All States:\t" + str(allStates.keys()).replace("'",""))
+        print ("\t\t" + str(allStates.values()).replace("'",""))
+        print ("Single States:\t" + str(singleStates.keys()).replace("'",""))
+        print ("\t\t" + str(singleStates.values()).replace("'",""))
     else:
-        print "All States:\t" + str(allStates.values()).replace("'","")
-        print "Single States:\t"+ str(singleStates.values()).replace("'","")        
+        print ("All States:\t" + str(allStates.values()).replace("'",""))
+        print ("Single States:\t"+ str(singleStates.values()).replace("'",""))      
 
 class TestCommon:
     def __init__(self, boardType, *args):
@@ -60,25 +60,25 @@ class TestCommon:
         
         dr.setAllStatesOff()
         
-        print "Turn on one-by-one"
+        print ("Turn on one-by-one")
         for relay in range(1,dr.getNumRelays()+1):
             testStateFunctions(dr, relay, True)
         
-        print "\n\nTurn off one-by-one"
+        print ("\n\nTurn off one-by-one")
         for relay in range(1,dr.getNumRelays()+1):
             testStateFunctions(dr, relay, False)
         
-        print "\n\nTurn all on"
+        print ("\n\nTurn all on")
         dr.setAllStatesOn()
         testGetFunctions(dr)
         time.sleep(0.5)
         
-        print "\n\nTurn all off"
+        print ("\n\nTurn all off")
         dr.setAllStatesOff()
         time.sleep(0.5)
         testGetFunctions(dr)
         
-        print "\n\nTurn even on"
+        print ("\n\nTurn even on")
         evenStates = {}
         for relay in range(1,dr.getNumRelays()+1): 
             evenStates[relay] = relay%2==0
@@ -86,12 +86,12 @@ class TestCommon:
         time.sleep(0.5)   
         testGetFunctions(dr)
         
-        print "\n\nTurn first on"
+        print ("\n\nTurn first on")
         dr.setState(1,True)  
         time.sleep(0.5)  
         testGetFunctions(dr)
         
-        print "\n\nTurn first off"
+        print ("\n\nTurn first off")
         dr.setState(1,False) 
         time.sleep(0.5)   
         testGetFunctions(dr)
