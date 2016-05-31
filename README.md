@@ -9,7 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 Known Limitations and Assumptions
 _________________________________
-1. Written and Tested in Python 2.7 only.
+1. Written and Tested in Python 2.7 only. (Look at the Python3 branch for experiemental Python 3 support).
 2. 4 and 8 relay boards do not handle connection to multiple devices. Connects to first found Denkovi.
 3. Not thread safe. 
 4. Possible race conditions with device plugging.
