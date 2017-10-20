@@ -153,8 +153,6 @@ class FTD2XXDllWrap(object):
                 if ret==FT_OK:
                     if idString in SN:
                         return self.FT_Open(i)
-                else:
-                    return (ret, None)
             return (ret, None)
         else:
             return (ret, None)
