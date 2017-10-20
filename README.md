@@ -1,4 +1,4 @@
-Denkovi Relay Board Controller v1.3
+Denkovi Relay Board Controller v1.3.1
 ===================================
 
 Copyright (c) Peter Bingham  (petersbingham@hotmail.co.uk)  
@@ -26,6 +26,7 @@ ____
 
 Change Log
 __________
+1.3.1 - Fixes premature return when trying to discover first device.
 1.3 - setup.py package installer added.  
 1.2 - Linux support added.  
 1.1 - Fixed serial not being flagged as close on disconnect and failure to ensure disconnection on a reconnect.  
