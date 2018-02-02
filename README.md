@@ -26,6 +26,7 @@ ____
 
 Change Log
 __________
+1.3.2 - Uses case insenesitive for the serial number comparison.
 1.3.1 - Fixes premature return when trying to discover first device.  
 1.3 - setup.py package installer added.  
 1.2 - Linux support added.  
