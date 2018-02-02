@@ -151,7 +151,7 @@ class FTD2XXDllWrap(object):
             for i in range(0, numDevs):
                 ret, SN = self.FT_GetDeviceSerialNumber(i)
                 if ret==FT_OK:
-                    if idString in SN:
+                    if idString.upper() in SN.upper():
                         return self.FT_Open(i)
             return (ret, None)
         else:
