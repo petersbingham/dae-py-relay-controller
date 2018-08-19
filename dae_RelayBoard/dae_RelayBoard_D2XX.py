@@ -21,7 +21,7 @@
 #-----------------------------------------------------------------------------
 
 import sys
-import dae_RelayBoard_Common
+from . import dae_RelayBoard_Common
 
 class DAE_RelayBoard_D2XX:
     BAUDRATE = 921600

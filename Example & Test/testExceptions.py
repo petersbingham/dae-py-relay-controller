@@ -33,7 +33,7 @@ def testException(function, *args):
     try:
         function(*args)
     except dae_RelayBoard_Common.Denkovi_Exception as inst:
-        print "Expected Exception: " + str(inst)
+        print ("Expected Exception: " + str(inst))
 
 def testBoard(boardType, numRelays, devID=None):
     dr = dae_RelayBoard.DAE_RelayBoard(boardType)
