@@ -27,12 +27,12 @@ COMPORT = "COM8"
 
 import time
 import dae_RelayBoard   
-import dae_RelayBoard_Common
+from dae_RelayBoard.dae_RelayBoard_Common import Denkovi_Exception
 
 def testException(function, *args):
     try:
         function(*args)
-    except dae_RelayBoard_Common.Denkovi_Exception as inst:
+    except Denkovi_Exception as inst:
         print ("Expected Exception: " + str(inst))
 
 def testBoard(boardType, numRelays, devID=None):
