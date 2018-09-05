@@ -22,7 +22,7 @@
 
 import serial
 import time
-import dae_RelayBoard_Common
+from . import dae_RelayBoard_Common
 
 class DAE_RelayBoard_VCP:
     TIMEOUT = 1.0
@@ -129,8 +129,11 @@ class DAE_RelayBoard_VCP:
             stateStringIndex = 0
             shifts = relay - 1
             
-        field = 128 >> shifts
-        return field & ord(stateString[stateStringIndex]) > 0
+        field = 128 >> int(shifts)
+        try:
+            return field & ord(stateString[stateStringIndex]) > 0 #Python 2
+        except TypeError:
+            return field & stateString[stateStringIndex] > 0      #Python 3
 
 ###############
 ### Helpers ###
@@ -147,7 +150,7 @@ class DAE_RelayBoard_VCP:
     def _write(self, cmdString):
         try:
             writeString = cmdString+self.DELIM
-            bytesWritten = self.ser.write(writeString)
+            bytesWritten = self.ser.write(writeString.encode())
             if len(writeString) != bytesWritten:
                 raise dae_RelayBoard_Common.Denkovi_Exception("Error during write")
         except (serial.SerialException, serial.SerialTimeoutException):

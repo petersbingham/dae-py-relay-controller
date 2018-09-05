@@ -21,7 +21,7 @@
 #-----------------------------------------------------------------------------
 
 import sys
-import dae_RelayBoard_Common
+from . import dae_RelayBoard_Common
 
 class DAE_RelayBoard_D2XX:
     BAUDRATE = 921600
@@ -30,10 +30,10 @@ class DAE_RelayBoard_D2XX:
     
     def __init__(self):       
         if sys.platform == 'win32':
-            import FTD2XXWindows
+            from . import FTD2XXWindows
             self.FTD2XX = FTD2XXWindows.FTD2XXWindows()
-        elif sys.platform == 'linux2':
-            import FTD2XXLinux
+        elif 'linux' in sys.platform:
+            from . import FTD2XXLinux
             self.FTD2XX = FTD2XXLinux.FTD2XXLinux()
         
         

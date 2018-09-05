@@ -20,8 +20,8 @@
 #THE SOFTWARE.
 #-----------------------------------------------------------------------------
 
-import FTD2XXDllWrap
-import dae_RelayBoard_Common
+from . import FTD2XXDllWrap
+from . import dae_RelayBoard_Common
 
 class FTD2XXWindows(object):
     def __init__(self):
@@ -41,7 +41,7 @@ class FTD2XXWindows(object):
         
     def writeByte(self, byte):
         self._checkInit()
-        self._handleRet(self.FTD2XXDLL.FT_Write(self.handle, chr(byte), 1))
+        self._handleRet(self.FTD2XXDLL.FT_Write(self.handle, byte, 1))
  
     def readByte(self):
         self._checkInit()

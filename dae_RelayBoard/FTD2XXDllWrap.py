@@ -89,7 +89,7 @@ class FTD2XXDllWrap(object):
         return (ret,)
 
     def FT_Write(self, handle, buff, numBytes):
-        buff = c_char_p(buff)
+        buff = pointer(c_byte(buff))
         bytesWritten = c_int()
         ret = self.FTD2XXDLL.FT_Write(handle, cast(buff,c_void_p), numBytes, pointer(bytesWritten))
         return (ret, bytesWritten)
@@ -120,7 +120,7 @@ class FTD2XXDllWrap(object):
         string = ""
         for i in range(0,MAX_BUFF_SZ):
             if buff[i] != "\x00":
-                string += buff[i]
+                string += buff[i].decode()
         return (ret, string)
     
     def FT_SetBitMode(self, handle, mask, enable):

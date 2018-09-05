@@ -21,7 +21,7 @@
 #-----------------------------------------------------------------------------
 
 import re
-import dae_RelayBoard_Common
+from . import dae_RelayBoard_Common
 from pylibftdi import BitBangDevice, Driver
             
 class FTD2XXLinux(object):
@@ -33,14 +33,14 @@ class FTD2XXLinux(object):
     def initialise(self, deviceID, baudRate, mask, bitMode):
         try:
             for dev in self.driver.list_devices():
-                if re.search(deviceID + '.+', dev[2]):
+                if re.search(deviceID + '.+', dev[2].decode()):
                     deviceID = dev[2]
-                    print('Found device ' + deviceID)
+                    print('Found device ' + deviceID.decode())
                     break
             if deviceID is None:
                 raise dae_RelayBoard_Common.Denkovi_Exception('No board connected')
 
-            self.bb = BitBangDevice(deviceID)
+            self.bb = BitBangDevice(deviceID.decode())
             self.bb.direction = mask
             self.bb.open()
         except Exception as e:

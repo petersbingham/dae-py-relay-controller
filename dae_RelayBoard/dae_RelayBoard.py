@@ -20,7 +20,7 @@
 #THE SOFTWARE.
 #-----------------------------------------------------------------------------
 
-import dae_RelayBoard_Common
+from . import dae_RelayBoard_Common
 
 DAE_RELAYBOARD_TYPE_4 = "type4"
 DAE_RELAYBOARD_TYPE_8 = "type8"
@@ -31,14 +31,14 @@ class DAE_RelayBoard:
         self.relayHandler = None
         self.CommString = False
         if boardType == DAE_RELAYBOARD_TYPE_16:
-            import dae_RelayBoard_VCP
+            from . import dae_RelayBoard_VCP
             self.CommString = True
             self.relayHandler = dae_RelayBoard_VCP.DAE_RelayBoard_16(*args)
         elif boardType == DAE_RELAYBOARD_TYPE_8:
-            import dae_RelayBoard_D2XX
+            from . import dae_RelayBoard_D2XX
             self.relayHandler = dae_RelayBoard_D2XX.DAE_RelayBoard_8()
         elif boardType == DAE_RELAYBOARD_TYPE_4:
-            import dae_RelayBoard_D2XX
+            from . import dae_RelayBoard_D2XX
             self.relayHandler = dae_RelayBoard_D2XX.DAE_RelayBoard_4()
         self._checkInit()
     
