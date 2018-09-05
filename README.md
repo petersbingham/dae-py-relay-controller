@@ -1,4 +1,4 @@
-Denkovi Relay Board Controller v1.3.1
+Denkovi Relay Board Controller v1.3.2
 ===================================
 
 Copyright (c) Peter Bingham  (petersbingham@hotmail.co.uk)  
@@ -9,7 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 Known Limitations and Assumptions
 _________________________________
-1. Written and Tested in Python 2.7 only. (Look at the Python3 branch for experimental Python 3 support).
+1. Written and Tested in Python 2.7 and 3.5.
 2. 4 and 8 relay boards do not handle connection to multiple devices. Connects to first found Denkovi.
 3. Not thread safe. 
 4. Possible race conditions with device plugging.
@@ -26,8 +26,8 @@ ____
 
 Change Log
 __________
-1.3.2 - Uses case insenesitive for the serial number comparison.
-1.3.1 - Fixes premature return when trying to discover first device.  
-1.3 - setup.py package installer added.  
-1.2 - Linux support added.  
-1.1 - Fixed serial not being flagged as close on disconnect and failure to ensure disconnection on a reconnect.  
+ * 1.3.2 - Uses case insenesitive for the serial number comparison.
+ * 1.3.1 - Fixes premature return when trying to discover first device.
+ * 1.3 - setup.py package installer added.
+ * 1.2 - Linux support added.
+ * 1.1 - Fixed serial not being flagged as close on disconnect and failure to ensure disconnection on a reconnect.
