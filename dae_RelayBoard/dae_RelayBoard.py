@@ -26,7 +26,7 @@ DAE_RELAYBOARD_TYPE_4 = "type4"
 DAE_RELAYBOARD_TYPE_8 = "type8"
 DAE_RELAYBOARD_TYPE_16 = "type16"
 
-class DAE_RelayBoard:    
+class DAE_RelayBoard:
     def __init__(self, boardType, *args):
         self.relayHandler = None
         self.CommString = False
@@ -36,19 +36,19 @@ class DAE_RelayBoard:
             self.relayHandler = dae_RelayBoard_VCP.DAE_RelayBoard_16(*args)
         elif boardType == DAE_RELAYBOARD_TYPE_8:
             from . import dae_RelayBoard_D2XX
-            self.relayHandler = dae_RelayBoard_D2XX.DAE_RelayBoard_8()
+            self.relayHandler = dae_RelayBoard_D2XX.DAE_RelayBoard_8(*args)
         elif boardType == DAE_RELAYBOARD_TYPE_4:
             from . import dae_RelayBoard_D2XX
-            self.relayHandler = dae_RelayBoard_D2XX.DAE_RelayBoard_4()
+            self.relayHandler = dae_RelayBoard_D2XX.DAE_RelayBoard_4(*args)
         self._checkInit()
-    
+
     def needsCommString(self):
         return self.CommString
-        
+
     def initialise(self, *args):
         self._checkInit()
         self.relayHandler.initialise(*args)
-    
+
     def disconnect(self):
         self._checkInit()
         self.relayHandler.disconnect()
@@ -59,7 +59,7 @@ class DAE_RelayBoard:
 
 ###############
 ### Setters ###
-###############  
+###############
 
     def setAllStatesOn(self):
         self._checkInit()
@@ -68,10 +68,10 @@ class DAE_RelayBoard:
     def setAllStatesOff(self):
         self._checkInit()
         self.relayHandler.setAllStatesOff()
-    
+
     def setStates(self, states):
         self.relayHandler.setStates(states)
-    
+
     def setState(self, relay, on):
         self._checkInit()
         self.relayHandler.setState(relay, on)
@@ -79,20 +79,20 @@ class DAE_RelayBoard:
 ###############
 ### Getters ###
 ###############
-                          
+
     def getStates(self):
         self._checkInit()
         return self.relayHandler.getStates()
-            
+
     def getState(self, relay):
         self._checkInit()
         return self.relayHandler.getState(relay)
 
 ###############
 ### Helpers ###
-############### 
-        
+###############
+
     def _checkInit(self):
         if self.relayHandler is None:
             raise dae_RelayBoard_Common.Denkovi_Exception("No supported board has been successfully initialised")
-                
+
