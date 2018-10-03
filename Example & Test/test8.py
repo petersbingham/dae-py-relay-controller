@@ -24,3 +24,11 @@ import testCommon
 import dae_RelayBoard
 
 testCommon.TestCommon(dae_RelayBoard.DAE_RELAYBOARD_TYPE_8)
+
+# Multiple board support - Test with first board:
+
+#testCommon.TestCommon(dae_RelayBoard.DAE_RELAYBOARD_TYPE_8, 'DAE#0')
+
+# Test with second board:
+
+#testCommon.TestCommon(dae_RelayBoard.DAE_RELAYBOARD_TYPE_8, 'DAE#1')
