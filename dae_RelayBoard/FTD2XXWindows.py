@@ -29,7 +29,7 @@ class FTD2XXWindows(object):
         self.FTD2XXDLL = FTD2XXDllWrap.FTD2XXDllWrap()
  
     def initialise(self, deviceID, baudRate, mask, bitMode):
-        self.handle = self._handleRet(self.FTD2XXDLL.initFirstSpecifiedSerialNum(deviceID))[1]
+        self.handle = self._handleRet(self.FTD2XXDLL.initSpecified(deviceID))[1]
         self._checkInit()
         self._handleRet(self.FTD2XXDLL.FT_SetBaudRate(self.handle, baudRate))
         self._handleRet(self.FTD2XXDLL.FT_SetBitMode(self.handle, mask, bitMode))

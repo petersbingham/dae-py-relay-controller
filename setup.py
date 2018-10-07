@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name='dae_RelayBoard',
-      version='1.4.0',
+      version='1.5.0',
       description='Denkovi Relay Board Controller',
       author='Peter Bingham',
       author_email='petersbingham@hotmail.co.uk',

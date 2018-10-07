@@ -145,7 +145,7 @@ class FTD2XXDllWrap(object):
 ### Helpers ###
 ############### 
 
-    def initFirstSpecifiedSerialNum(self, idString):
+    def initFirst(self, idString):
         ret, numDevs = self.FT_GetNumDevices()
         if ret==FT_OK:
             for i in range(0, numDevs):
@@ -153,6 +153,28 @@ class FTD2XXDllWrap(object):
                 if ret==FT_OK:
                     if idString.upper() in SN.upper():
                         return self.FT_Open(i)
+            return (ret, None)
+        else:
+            return (ret, None)
+
+    def initSpecified(self, idString):
+        indexed = idString.split("#", 2)
+        if len(indexed) == 2:
+            idString = indexed[0]
+            which = int(indexed[1])
+        else:
+            which = 0
+
+        index = 0
+        ret, numDevs = self.FT_GetNumDevices()
+        if ret==FT_OK:
+            for i in range(0, numDevs):
+                ret, SN = self.FT_GetDeviceSerialNumber(i)
+                if ret==FT_OK:
+                    if idString.upper() in SN.upper():
+                        if which == index:
+                            return self.FT_Open(i)
+                        index += 1
             return (ret, None)
         else:
             return (ret, None)

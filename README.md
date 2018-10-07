@@ -19,13 +19,21 @@ _________________________________
 Help
 ____
  * Install using "python setup.py install" in this directory at thecommand line.
- * Both installions require serial module. The Linux version requires pylibftdi. For Windows FTD2XX.dll will need to be in your path.
+ * Both installions require serial module. The Linux version requires pylibftdi. For Windows FTD2XX.dll will need to be in your path; you can get this by allowing windows to download and install the drivers for the board.
  * Usage is pretty simple. Have a look at the examples and test code in the "Example & Test" folder. Look at the dae_RelayBoard file to see the interface functions.
  * To run "Example & Test\example16.py", for example, set the com port in the file and then open a cmd and cd into "Example & Test" folder and type "python example16.py".
+ * For the case of multiple FTDI devices (4 & 8 relay boards) add a #num to the end of the, otherwise optional, deviceID (eg type4#3). num is zero indexed. See following example:
+ 
+```python3
+import dae_RelayBoard
+dr = dae_RelayBoard.DAE_RelayBoard("type4")
+dr.initialise("DAE#1") # initialise second board
+```
 
 
 Change Log
 __________
+ * 1.5.0 - Adds ability to select from multiple FTDI devices.
  * 1.4.0 - Adds Python 3 support.
  * 1.3.2 - Uses case insensitive for the serial number comparison.
  * 1.3.1 - Fixes premature return when trying to discover first device.
