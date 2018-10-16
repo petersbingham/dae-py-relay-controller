@@ -62,7 +62,9 @@ class FTD2XXLinux(object):
             raise dae_RelayBoard_Common.Denkovi_Exception('Relay board: %s#%d not found' % (deviceID, index))
 
     def close(self):
-        pass
+        if self.bb is None:
+            raise dae_RelayBoard_Common.Denkovi_Exception('Board non initialized')
+        self.bb.close()
 
     def writeByte(self, byte):
         if self.bb is None:
