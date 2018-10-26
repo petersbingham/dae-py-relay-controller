@@ -39,6 +39,7 @@ class DAE_RelayBoard_D2XX:
         
     #currently only gets first board
     def initialise(self, *args):
+        self.disconnect()
         self._checkInit()
         deviceId = dae_RelayBoard_Common.DENKOVI_ID
         if len(args):
