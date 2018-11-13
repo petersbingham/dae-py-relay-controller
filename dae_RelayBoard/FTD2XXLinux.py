@@ -64,8 +64,6 @@ class FTD2XXLinux(object):
     def close(self):
         if self.bb is not None:
             self.bb.close()
-        else:
-            pass
 
     def writeByte(self, byte):
         if self.bb is None:
