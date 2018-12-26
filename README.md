@@ -1,4 +1,4 @@
-Denkovi Relay Board Controller v1.4.0
+Denkovi Relay Board Controller v1.5.1
 ===================================
 
 Copyright (c) Peter Bingham  (petersbingham@hotmail.co.uk)  
@@ -33,6 +33,7 @@ dr.initialise("DAE#1") # initialise second board
 
 Change Log
 __________
+ * 1.5.1 - Correctly shuts down FTDI on Linux.
  * 1.5.0 - Adds ability to select from multiple FTDI devices.
  * 1.4.0 - Adds Python 3 support.
  * 1.3.2 - Uses case insensitive for the serial number comparison.
