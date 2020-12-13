@@ -80,9 +80,9 @@ class FTD2XXDllWrap(object):
         self.FTD2XXDLL = WinDLL("FTD2XX.dll")
  
     def FT_Open(self, deviceNum):
-        handle = c_int()
+        handle = c_void_p()
         ret = self.FTD2XXDLL.FT_Open(deviceNum, pointer(handle))
-        return (ret, handle.value)
+        return (ret, handle)
  
     def FT_Close(self, handle):
         ret = self.FTD2XXDLL.FT_Close(handle)
