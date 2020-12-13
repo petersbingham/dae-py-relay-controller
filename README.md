@@ -33,6 +33,7 @@ dr.initialise("DAE#1") # initialise second board
 
 Change Log
 __________
+ * 1.5.2 - Fix FT_handle type to match FTD2XX DLL library.
  * 1.5.1 - Correctly shuts down FTDI on Linux.
  * 1.5.0 - Adds ability to select from multiple FTDI devices.
  * 1.4.0 - Adds Python 3 support.
