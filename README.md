@@ -1,4 +1,4 @@
-Denkovi Relay Board Controller v1.5.1
+Denkovi Relay Board Controller v1.5.2
 ===================================
 
 Copyright (c) Peter Bingham  (petersbingham@hotmail.co.uk)  
