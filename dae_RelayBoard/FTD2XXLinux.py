@@ -44,11 +44,11 @@ class FTD2XXLinux(object):
             index = 0
             found = False
             for dev in self.driver.list_devices():
-                if re.search(deviceID + '.+', dev[2].decode()):
+                if re.search(deviceID + '.+', dev[2]):
                     if which == index:
                         found = True
-                        print('Found device %s#%d => %s' % (deviceID, index, dev[2].decode()))
-                        deviceID = dev[2].decode()
+                        print('Found device %s#%d => %s' % (deviceID, index, dev[2]))
+                        deviceID = dev[2]
                         break
                     index += 1
 
